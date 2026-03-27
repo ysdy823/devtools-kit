@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevTools Online — Free Developer Toolkit | JSON, Base64, JWT, Hash, UUID & More</title>
+    <meta name="description" content="Free online developer toolkit with 9 essential tools: JSON Formatter, Base64 Encoder, JWT Decoder, Hash Generator, UUID Generator, Regex Tester, URL Encoder, Timestamp Converter, and Text Diff. 100% client-side — your data never leaves your browser.">
+    <meta name="keywords" content="developer tools, JSON formatter, Base64 encoder, JWT decoder, hash generator, UUID generator, regex tester, URL encoder, timestamp converter, text diff, online tools, free tools">
+    <meta name="author" content="PremiumSupportHub">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://strategy-ai.co/devtools/">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="DevTools Online — Free Developer Toolkit">
+    <meta property="og:description" content="9 essential developer tools in your browser. JSON Formatter, Base64, JWT, Hash, UUID, Regex, URL Encoder, Timestamps & Diff. 100% client-side privacy.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://strategy-ai.co/devtools/">
+    <meta property="og:site_name" content="DevTools Online">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="DevTools Online — Free Developer Toolkit">
+    <meta name="twitter:description" content="9 essential developer tools in your browser. 100% client-side — your data never leaves your machine.">
+
+    <style>
+        :root {
+            --bg: #0a0e17;
+            --surface: #131926;
+            --surface-hover: #1a2235;
+            --border: #1e2a3a;
+            --primary: #3b82f6;
+            --primary-glow: rgba(59, 130, 246, 0.15);
+            --accent: #06d6a0;
+            --accent-glow: rgba(6, 214, 160, 0.12);
+            --text: #e2e8f0;
+            --text-muted: #8892a4;
+            --bmac: #ffdd00;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Ambient glow */
+        body::before {
+            content: '';
+            position: fixed;
+            top: -40%;
+            left: -20%;
+            width: 80%;
+            height: 80%;
+            background: radial-gradient(ellipse, rgba(59,130,246,0.06) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 24px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* NAV */
+        nav {
+            padding: 20px 0;
+            border-bottom: 1px solid var(--border);
+            backdrop-filter: blur(12px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(10, 14, 23, 0.85);
+        }
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--text);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+        .nav-links {
+            display: flex;
+            gap: 28px;
+            align-items: center;
+        }
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+        .nav-links a:hover { color: var(--text); }
+
+        /* HERO */
+        .hero {
+            padding: 100px 0 80px;
+            text-align: center;
+        }
+        .badge {
+            display: inline-block;
+            padding: 6px 16px;
+            background: var(--primary-glow);
+            border: 1px solid rgba(59,130,246,0.25);
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: var(--primary);
+            margin-bottom: 28px;
+            letter-spacing: 0.03em;
+        }
+        .hero h1 {
+            font-size: clamp(2.4rem, 5vw, 3.6rem);
+            font-weight: 800;
+            line-height: 1.15;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--text) 0%, var(--text-muted) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .hero h1 span {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto 40px;
+        }
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 28px;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.25s;
+            cursor: pointer;
+            border: none;
+        }
+        .btn-primary {
+            background: var(--primary);
+            color: #fff;
+            box-shadow: 0 4px 20px rgba(59,130,246,0.3);
+        }
+        .btn-primary:hover {
+            background: #2563eb;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 28px rgba(59,130,246,0.4);
+        }
+        .btn-outline {
+            background: transparent;
+            color: var(--text);
+            border: 1px solid var(--border);
+        }
+        .btn-outline:hover {
+            background: var(--surface);
+            border-color: var(--text-muted);
+        }
+        .btn-bmac {
+            background: var(--bmac);
+            color: #000;
+            font-weight: 700;
+            box-shadow: 0 4px 20px rgba(255,221,0,0.2);
+        }
+        .btn-bmac:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 28px rgba(255,221,0,0.35);
+        }
+
+        /* FEATURES / PRIVACY */
+        .features-bar {
+            display: flex;
+            justify-content: center;
+            gap: 48px;
+            padding: 32px 0;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 80px;
+            flex-wrap: wrap;
+        }
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+        .feature-item svg {
+            width: 20px;
+            height: 20px;
+            color: var(--accent);
+            flex-shrink: 0;
+        }
+
+        /* TOOLS GRID */
+        .tools-section { padding-bottom: 80px; }
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+        .section-sub {
+            text-align: center;
+            color: var(--text-muted);
+            margin-bottom: 48px;
+            font-size: 1.05rem;
+        }
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 20px;
+        }
+        .tool-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 28px;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        .tool-card:hover {
+            background: var(--surface-hover);
+            border-color: rgba(59,130,246,0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+        }
+        .tool-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .tool-card:hover::before { opacity: 1; }
+        .tool-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            margin-bottom: 16px;
+        }
+        .tool-card h3 {
+            font-size: 1.15rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        .tool-card p {
+            color: var(--text-muted);
+            font-size: 0.92rem;
+            line-height: 1.55;
+        }
+
+        /* COLOR CODING TOOL ICONS */
+        .tc-json .tool-icon { background: rgba(251,191,36,0.12); }
+        .tc-b64 .tool-icon { background: rgba(139,92,246,0.12); }
+        .tc-jwt .tool-icon { background: rgba(239,68,68,0.12); }
+        .tc-hash .tool-icon { background: rgba(34,197,94,0.12); }
+        .tc-uuid .tool-icon { background: rgba(59,130,246,0.12); }
+        .tc-regex .tool-icon { background: rgba(236,72,153,0.12); }
+        .tc-url .tool-icon { background: rgba(6,182,212,0.12); }
+        .tc-ts .tool-icon { background: rgba(249,115,22,0.12); }
+        .tc-diff .tool-icon { background: rgba(168,85,247,0.12); }
+
+        /* CTA */
+        .cta {
+            text-align: center;
+            padding: 80px 0;
+            border-top: 1px solid var(--border);
+        }
+        .cta h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+        .cta p {
+            color: var(--text-muted);
+            margin-bottom: 32px;
+            font-size: 1.05rem;
+        }
+        .cta-buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* FOOTER */
+        footer {
+            padding: 32px 0;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.88rem;
+        }
+        footer a { color: var(--primary); text-decoration: none; }
+        footer a:hover { text-decoration: underline; }
+
+        /* RESPONSIVE */
+        @media (max-width: 640px) {
+            .hero { padding: 60px 0 50px; }
+            .features-bar { gap: 24px; padding: 24px 0; }
+            .tools-grid { grid-template-columns: 1fr; }
+            .nav-links { gap: 16px; }
+        }
+    </style>
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "DevTools Online",
+        "url": "https://strategy-ai.co/devtools/",
+        "description": "Free online developer toolkit with 9 essential tools. 100% client-side processing.",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "Any",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "featureList": [
+            "JSON Formatter",
+            "Base64 Encoder/Decoder",
+            "JWT Decoder",
+            "Hash Generator",
+            "UUID Generator",
+            "Regex Tester",
+            "URL Encoder/Decoder",
+            "Timestamp Converter",
+            "Text Diff"
+        ]
+    }
+    </script>
+</head>
+<body>
+
+<nav>
+    <div class="container">
+        <a href="https://strategy-ai.co/devtools/" class="logo">
+            <div class="logo-icon">&lt;/&gt;</div>
+            DevTools Online
+        </a>
+        <div class="nav-links">
+            <a href="#tools">Tools</a>
+            <a href="https://github.com/ysdy823/devtools-online" target="_blank">GitHub</a>
+            <a href="https://buymeacoffee.com/PremiumSupportHub" target="_blank" class="btn btn-bmac" style="padding:8px 18px;font-size:0.9rem;border-radius:8px;">Buy Me a Coffee</a>
+        </div>
+    </div>
+</nav>
+
+<section class="hero">
+    <div class="container">
+        <div class="badge">Open Source &bull; MIT Licensed &bull; 100% Free</div>
+        <h1>Developer tools that<br><span>respect your privacy</span></h1>
+        <p>9 essential tools — JSON, Base64, JWT, Hashing, UUID, Regex, URL encoding, Timestamps & Diff — running entirely in your browser. Your data never leaves your machine.</p>
+        <div class="hero-buttons">
+            <a href="https://strategy-ai.co/devtools/" class="btn btn-primary">
+                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                Launch DevTools
+            </a>
+            <a href="https://github.com/ysdy823/devtools-online" class="btn btn-outline" target="_blank">
+                <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                View on GitHub
+            </a>
+            <a href="https://buymeacoffee.com/PremiumSupportHub" class="btn btn-bmac" target="_blank">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M4 9h13a3 3 0 010 6h-1v2a3 3 0 01-3 3H7a3 3 0 01-3-3V9z" stroke="#000" stroke-width="2"/><path d="M6 5c.5-1 1.5-2 3-2s2 1 2 1 .5-1 2-1 2.5 1 3 2" stroke="#000" stroke-width="1.5" stroke-linecap="round"/></svg>
+                Buy Me a Coffee
+            </a>
+        </div>
+    </div>
+</section>
+
+<div class="container">
+    <div class="features-bar">
+        <div class="feature-item">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            100% Client-Side Processing
+        </div>
+        <div class="feature-item">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg>
+            Works Offline
+        </div>
+        <div class="feature-item">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+            No Account Required
+        </div>
+        <div class="feature-item">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+            Zero Data Collection
+        </div>
+    </div>
+</div>
+
+<section class="tools-section" id="tools">
+    <div class="container">
+        <h2 class="section-title">9 Essential Developer Tools</h2>
+        <p class="section-sub">Everything you need for day-to-day development — fast, private, and always available.</p>
+
+        <div class="tools-grid">
+            <div class="tool-card tc-json">
+                <div class="tool-icon">{ }</div>
+                <h3>JSON Formatter</h3>
+                <p>Pretty-print, minify, and validate JSON with syntax highlighting. Instantly catch malformed payloads and explore nested structures.</p>
+            </div>
+            <div class="tool-card tc-b64">
+                <div class="tool-icon">B64</div>
+                <h3>Base64 Encoder / Decoder</h3>
+                <p>Encode and decode Base64 strings in real time. Handles text and binary data for API payloads, authentication tokens, and data URIs.</p>
+            </div>
+            <div class="tool-card tc-jwt">
+                <div class="tool-icon">JWT</div>
+                <h3>JWT Decoder</h3>
+                <p>Inspect JSON Web Tokens — decode header, payload, and signature. See expiration times, claims, and issuer details at a glance.</p>
+            </div>
+            <div class="tool-card tc-hash">
+                <div class="tool-icon">#</div>
+                <h3>Hash Generator</h3>
+                <p>Generate MD5, SHA-1, SHA-256, and SHA-512 hashes instantly. Verify checksums and compare file integrity without leaving your browser.</p>
+            </div>
+            <div class="tool-card tc-uuid">
+                <div class="tool-icon">ID</div>
+                <h3>UUID Generator</h3>
+                <p>Generate RFC 4122 v4 UUIDs — single or in bulk. Copy-ready output for database seeding, testing, and unique identifier needs.</p>
+            </div>
+            <div class="tool-card tc-regex">
+                <div class="tool-icon">.*</div>
+                <h3>Regex Tester</h3>
+                <p>Build and test regular expressions with real-time match highlighting. See capture groups, test against sample text, and iterate fast.</p>
+            </div>
+            <div class="tool-card tc-url">
+                <div class="tool-icon">%</div>
+                <h3>URL Encoder / Decoder</h3>
+                <p>Encode and decode URL components. Handle query parameters, special characters, and percent-encoded strings effortlessly.</p>
+            </div>
+            <div class="tool-card tc-ts">
+                <div class="tool-icon">T</div>
+                <h3>Timestamp Converter</h3>
+                <p>Convert between Unix timestamps and human-readable dates. Supports multiple timezones and common date formats.</p>
+            </div>
+            <div class="tool-card tc-diff">
+                <div class="tool-icon">&Delta;</div>
+                <h3>Text Diff</h3>
+                <p>Side-by-side text comparison with highlighted additions, deletions, and changes. Perfect for comparing configs, API responses, and code snippets.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="cta">
+    <div class="container">
+        <h2>Start using DevTools now</h2>
+        <p>No installation, no signup, no tracking. Just open and use.</p>
+        <div class="cta-buttons">
+            <a href="https://strategy-ai.co/devtools/" class="btn btn-primary">
+                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                Open DevTools
+            </a>
+            <a href="https://buymeacoffee.com/PremiumSupportHub" class="btn btn-bmac" target="_blank">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M4 9h13a3 3 0 010 6h-1v2a3 3 0 01-3 3H7a3 3 0 01-3-3V9z" stroke="#000" stroke-width="2"/><path d="M6 5c.5-1 1.5-2 3-2s2 1 2 1 .5-1 2-1 2.5 1 3 2" stroke="#000" stroke-width="1.5" stroke-linecap="round"/></svg>
+                Support This Project
+            </a>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="container">
+        <p>DevTools Online &mdash; Built with care by <a href="https://buymeacoffee.com/PremiumSupportHub">PremiumSupportHub</a> &bull; <a href="https://github.com/ysdy823/devtools-online">Open Source on GitHub</a> &bull; MIT License</p>
+    </div>
+</footer>
+
+</body>
+</html>
