@@ -1,0 +1,44 @@
+{
+  "name": "devtools-kit",
+  "version": "1.0.0",
+  "description": "A lightweight developer toolkit — JSON formatter, Base64, JWT decoder, hash generator, UUID, regex tester, URL encoder, timestamp converter, and text diff. All tools work offline with zero dependencies.",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "test": "node --test tests/",
+    "prepublishOnly": "npm run build && npm test"
+  },
+  "keywords": [
+    "devtools",
+    "json-formatter",
+    "base64",
+    "jwt-decoder",
+    "hash",
+    "uuid",
+    "regex",
+    "url-encoder",
+    "timestamp",
+    "diff",
+    "developer-tools",
+    "utility"
+  ],
+  "author": "DevTools Team",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/devtools-kit/devtools-kit"
+  },
+  "devDependencies": {
+    "@types/node": "^25.5.0",
+    "typescript": "^5.4.0"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  }
+}
